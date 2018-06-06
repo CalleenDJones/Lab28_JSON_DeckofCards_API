@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@if (ViewBag.Error != null)
+{
+    <div>
+        <h2>Error: Status @ViewBag.Error</h2>
+        @ViewBag.ErrorDescription
+        <br />
+        @ViewBag.Data
+    </div>
+}
+else
+{
+    <center>
+        <h1>Deck of Cards: What's in Your Hand??</h1><br /><br />
+        <button onclick="newHand()">Deal New Hand...</button>
+        <script>
+            function newHand(@ViewBag.DeckID)
+            {
+                location.reload();
+            }
+        </script>
+    </center>
+
+    <div>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Suite</th>
+                <th>Value</th>
+                <th>Card</th>
+            </tr>
+           
+            @for (int i = 0; i < ViewBag.Cards.Count; i++)
+            {
+                <tr>
+                    <td width="25%">@ViewBag.Cards[i].suit</td>
+                    <td width="25%">@ViewBag.Cards[i].value</td>
+
+                    <td width="50%">
+                    <img src="@ViewBag.Cards[i].image"
+                     height="120" width="120" />
+                    </td>
+
+                </tr>
+           }
+        </table>
+
+      
+    </div>
+}
